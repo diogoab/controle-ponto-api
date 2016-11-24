@@ -7,14 +7,21 @@ use App\Horario;
 
 class HorariosController extends Controller
 {
+    protected $horarios;
+
+    protected $guarded = ['id'];
+
+    public function __construct (Horario $horarios) {
+      $this->horarios = $horarios;
+    }
     public function index()
     {
-        return Horario::all();
+        return $this->horarios->all();
     }
 
     public function store(Request $request)
     {
-        return Horario::create($request->all());
+        return $this->horarios->cadastrar($request->all());
     }
 
     public function show(Horario $horario)
